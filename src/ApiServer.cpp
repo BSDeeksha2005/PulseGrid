@@ -85,7 +85,7 @@ void runApiServer(const AggregatorSnapshot& snapshot, int port) {
     httplib::Server server;
 
     server.set_default_headers({
-        {"Access-Control-Allow-Origin", "http://localhost:3001"},
+        {"Access-Control-Allow-Origin", "*"},
         {"Access-Control-Allow-Methods", "GET, OPTIONS"},
         {"Access-Control-Allow-Headers", "Content-Type"}
     });
