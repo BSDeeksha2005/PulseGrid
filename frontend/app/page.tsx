@@ -52,7 +52,7 @@ type MetricProps = {
   suffix?: string
 }
 
-const API_BASE = "http://localhost:8081/api"
+const API_BASE = "https://pulsegrid-f9k6.onrender.com/api"
 
 const severityStyles: Record<Severity, string> = {
   High: "border-[#9d5148] bg-[#3a2523] text-[#e39a8f]",
