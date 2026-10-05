@@ -3,6 +3,7 @@
 #include <vector>
 #include <chrono>
 #include <string>
+#include <cstdlib>
 
 #include "ThreadSafeQueue.h"
 #include "TrafficEvent.h"
@@ -99,10 +100,26 @@ int main(int argc, char* argv[]) {
 
     std::cout << "=======================================\n";
 
-    std::cout << "Starting API server on "
-              << "http://localhost:8081\n";
+    // Use the PORT supplied by the deployment platform.
+    // Fall back to 8081 for local development.
+    int port = 8081;
 
-    runApiServer(snapshot, 8081);
+    if (const char* envPort = std::getenv("PORT")) {
+        try {
+            port = std::stoi(envPort);
+
+            if (port <= 0) {
+                port = 8081;
+            }
+        } catch (const std::exception&) {
+            port = 8081;
+        }
+    }
+
+    std::cout << "Starting API server on port "
+              << port << "\n";
+
+    runApiServer(snapshot, port);
 
     return 0;
 }
